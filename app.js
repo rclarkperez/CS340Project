@@ -31,65 +31,65 @@ app.get('/', function(req, res)
     let query1;
 
     // If there is no query string, we just perform a basic SELECT
-    if (req.query.lname === undefined)
+    if (req.query.name === undefined)
     {
-        query1 = "SELECT * FROM bsg_people;";
+        query1 = "SELECT * FROM bsg_emPhys;";
     }
 
     // If there is a query string, we assume this is a search, and return desired results
     else
     {
-        query1 = `SELECT * FROM bsg_people WHERE lname LIKE "${req.query.lname}%"`
+        query1 = `SELECT * FROM bsg_emPhys WHERE name LIKE "${req.query.name}%"`
     }
 
     // Query 2 is the same in both cases
-    let query2 = "SELECT * FROM bsg_planets;";
+    let query2 = "SELECT * FROM bsg_emPhyss;";
 
     // Run the 1st query
     db.pool.query(query1, function(error, rows, fields){
         
-        // Save the people
-        let people = rows;
+        // Save the emPhys
+        let emPhys = rows;
         
         // Run the second query
         db.pool.query(query2, (error, rows, fields) => {
             
-            // Save the planets
-            let planets = rows;
+            // Save the emPhyss
+            let emPhyss = rows;
 
             // BEGINNING OF NEW CODE
 
             // Construct an object for reference in the table
             // Array.map is awesome for doing something with each
             // element of an array.
-            let planetmap = {}
-            planets.map(planet => {
-                let id = parseInt(planet.id, 10);
+            let emPhysmap = {}
+            emPhyss.map(emPhys => {
+                let id = parseInt(emPhys.id, 10);
 
-                planetmap[id] = planet["name"];
+                emPhysmap[id] = emPhys["name"];
             })
 
-            // Overwrite the homeworld ID with the name of the planet in the people object
-            people = people.map(person => {
-                return Object.assign(person, {homeworld: planetmap[person.homeworld]})
+            // Overwrite the certification ID with the name of the emPhys in the emPhys object
+            emPhys = emPhys.map(emPhys => {
+                return Object.assign(emPhys, {certification: emPhysmap[emPhys.certification]})
             })
 
             // END OF NEW CODE
-            return res.render('index', {data: people, planets: planets});
+            return res.render('index', {data: emPhys, emPhyss: emPhyss});
         })
     })
 });
 
 
-app.post('/add-person-form', function(req, res){
+app.post('/add-emPhys-form', function(req, res){
     // Capture the incoming data and parse it back to a JS object
     let data = req.body;
 
     // Capture NULL values
-    let homeworld = parseInt(data['input-homeworld']);
-    if (isNaN(homeworld))
+    let certification = parseInt(data['input-certification']);
+    if (isNaN(certification))
     {
-        homeworld = 'NULL'
+        certification = 'NULL'
     }
 
     let age = parseInt(data['input-age']);
@@ -99,7 +99,7 @@ app.post('/add-person-form', function(req, res){
     }
 
     // Create the query and run it on the database
-    query1 = `INSERT INTO bsg_people (fname, lname, homeworld, age) VALUES ('${data['input-fname']}', '${data['input-lname']}', ${homeworld}, ${age})`;
+    query1 = `INSERT INTO bsg_emPhys (name, certification) VALUES ('${data['input-name']}', ${certification})`;
     db.pool.query(query1, function(error, rows, fields){
 
         // Check to see if there was an error
@@ -110,7 +110,7 @@ app.post('/add-person-form', function(req, res){
             res.sendStatus(400);
         }
 
-        // If there was no error, we redirect back to our root route, which automatically runs the SELECT * FROM bsg_people and
+        // If there was no error, we redirect back to our root route, which automatically runs the SELECT * FROM bsg_emPhys and
         // presents it on the screen
         else
         {
@@ -119,16 +119,16 @@ app.post('/add-person-form', function(req, res){
     })
 });
 
-app.post('/add-person-ajax', function(req, res) 
+app.post('/add-emPhys-ajax', function(req, res) 
 {
     // Capture the incoming data and parse it back to a JS object
     let data = req.body;
 
     // Capture NULL values
-    let homeworld = parseInt(data.homeworld);
-    if (isNaN(homeworld))
+    let certification = parseInt(data.certification);
+    if (isNaN(certification))
     {
-        homeworld = 'NULL'
+        certification = 'NULL'
     }
 
     let age = parseInt(data.age);
@@ -138,7 +138,7 @@ app.post('/add-person-ajax', function(req, res)
     }
 
     // Create the query and run it on the database
-    query1 = `INSERT INTO bsg_people (fname, lname, homeworld, age) VALUES ('${data.fname}', '${data.lname}', ${homeworld}, ${age})`;
+    query1 = `INSERT INTO bsg_emPhys (name, certification) VALUES ('${data.name}', ${certification})`;
     db.pool.query(query1, function(error, rows, fields){
 
         // Check to see if there was an error
@@ -150,38 +150,38 @@ app.post('/add-person-ajax', function(req, res)
         }
         else
         {
-            // If there was no error, perform a SELECT * on bsg_people
-            query2 = `SELECT bsg_people.id, bsg_people.fname, bsg_people.lname, bsg_people.homeworld, bsg_people.age, bsg_planets.name 
-FROM bsg_people 
-LEFT JOIN bsg_planets ON bsg_people.homeworld = bsg_planets.id;`;
-            db.pool.query(query2, function(error, rows, fields){
+//             // If there was no error, perform a SELECT * on bsg_emPhys
+//             query2 = `SELECT bsg_emPhys.id, bsg_emPhys.name, bsg_emPhys.certification, bsg_emPhys.age, bsg_planets.name 
+// FROM bsg_emPhys 
+// LEFT JOIN bsg_planets ON bsg_emPhys.certification = bsg_planets.id;`;
+//             db.pool.query(query2, function(error, rows, fields){
 
-                // If there was an error on the second query, send a 400
-                if (error) {
+//                 // If there was an error on the second query, send a 400
+//                 if (error) {
                     
                     // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
                     console.log(error);
                     res.sendStatus(400);
                 }
                 // If all went well, send the results of the query back.
-                else
-                {
-                    res.send(rows);
-                }
+                // else
+                // {
+                //     res.send(rows);
+                // }
+            res.send(rows);
+
             })
-        }
-    })
 });
 
-app.delete('/delete-person-ajax/', function(req,res,next){
+app.delete('/delete-emPhys-ajax/', function(req,res,next){
   let data = req.body;
-  let personID = parseInt(data.id);
-  let deleteBsg_Cert_People = `DELETE FROM bsg_cert_people WHERE pid = ?`;
-  let deleteBsg_People= `DELETE FROM bsg_people WHERE id = ?`;
+  let emPhysID = parseInt(data.id);
+  let deleteBsg_Cert_EmPhys = `DELETE FROM bsg_cert_emPhys WHERE pid = ?`;
+  let deleteBsg_EmPhys= `DELETE FROM bsg_emPhys WHERE id = ?`;
 
 
         // Run the 1st query
-        db.pool.query(deleteBsg_Cert_People, [personID], function(error, rows, fields){
+        db.pool.query(deleteBsg_Cert_EmPhys, [emPhysID], function(error, rows, fields){
             if (error) {
 
             // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
@@ -192,7 +192,7 @@ app.delete('/delete-person-ajax/', function(req,res,next){
             else
             {
                 // Run the second query
-                db.pool.query(deleteBsg_People, [personID], function(error, rows, fields) {
+                db.pool.query(deleteBsg_EmPhys, [emPhysID], function(error, rows, fields) {
 
                     if (error) {
                         console.log(error);
@@ -204,17 +204,17 @@ app.delete('/delete-person-ajax/', function(req,res,next){
             }
 })});
 
-app.put('/put-person-ajax', function(req,res,next){                                   
+app.put('/put-emPhys-ajax', function(req,res,next){                                   
   let data = req.body;
 
-  let homeworld = parseInt(data.homeworld);
-  let person = parseInt(data.fullname);
+  let certification = parseInt(data.certification);
+  let emPhys = parseInt(data.name);
 
-  queryUpdateWorld = `UPDATE bsg_people SET homeworld = ? WHERE bsg_people.id = ?`;
-  selectWorld = `SELECT * FROM bsg_planets WHERE id = ?`
+  queryUpdateCertification = `UPDATE bsg_emPhys SET certification = ? WHERE bsg_emPhys.id = ?`;
+//   selectCertification = `SELECT * FROM bsg_planets WHERE id = ?`
 
         // Run the 1st query
-        db.pool.query(queryUpdateWorld, [homeworld, person], function(error, rows, fields){
+        db.pool.query(queryUpdateCertification, [certification, emPhys], function(error, rows, fields){
             if (error) {
 
             // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
@@ -222,20 +222,20 @@ app.put('/put-person-ajax', function(req,res,next){
             res.sendStatus(400);
             }
 
-            // If there was no error, we run our second query and return that data so we can use it to update the people's
+            // If there was no error, we run our second query and return that data so we can use it to update the emPhys's
             // table on the front-end
             else
             {
-                // Run the second query
-                db.pool.query(selectWorld, [homeworld], function(error, rows, fields) {
+                // // Run the second query
+                // db.pool.query(selectCertification, [certification], function(error, rows, fields) {
         
-                    if (error) {
-                        console.log(error);
-                        res.sendStatus(400);
-                    } else {
+                //     if (error) {
+                //         console.log(error);
+                //         res.sendStatus(400);
+                //     } else {
                         res.send(rows);
-                    }
-                })
+                    // }
+                // })
             }
 })});
 

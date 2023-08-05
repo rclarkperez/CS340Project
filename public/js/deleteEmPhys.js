@@ -45,7 +45,7 @@ function deletePerson(EmPhysID) {
 
 function deleteRow(EmPhysID){
 
-    let table = document.getElementById("people-table");
+    let table = document.getElementById("emPhys-table");
     for (let i = 0, row; row = table.rows[i]; i++) {
        //iterate through rows
        //rows would be accessed using the "row" variable assigned in the for loop
@@ -61,7 +61,7 @@ function deleteRow(EmPhysID){
 function deleteDropDownMenu(EmPhysID){
   let selectMenu = document.getElementById("mySelect");
   for (let i = 0; i < selectMenu.length; i++){
-    if (Number(selectMenu.options[i].value) === Number(personID)){
+    if (Number(selectMenu.options[i].value) === Number(emPhysID)){
       selectMenu[i].remove();
       break;
     } 

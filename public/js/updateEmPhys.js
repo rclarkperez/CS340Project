@@ -13,7 +13,7 @@ updateEmPhysForm.addEventListener("submit", function (e) {
     let inputCredential = document.getElementById("input-credential-update");
 
     // Get the values from the form fields
-    let fullNameValue = inputName.value;
+    let nameValue = inputName.value;
     let credentialValue = inputCredential.value;
     
     // currently the database table for bsg_emPhys does not allow updating values to NULL

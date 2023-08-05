@@ -18,14 +18,32 @@
     </header>
     <main>
       <h2>Insert New Emergency Physician</h2>
-      <form action="/insertPhysician" method="post">
+      <form 
+      action="/insertPhysician" 
+      method="post"
+      id = add-EmPhys-form-ajax
+      >
+        <label>
+          ID:
+          <input 
+          id = "input-id"
+          type="text" 
+          name="id" 
+          required 
+          /><br /> </label>
         <label>
           Name:
-          <input type="text" name="name" required /><br /> </label
+          <input 
+          id = "input-name"
+          type="text" 
+          name="name" 
+          required 
+          /><br /> </label
         ><br />
         <label>
           Credential:
           <input
+            id = "input-credential"
             type="text"
             name="credential"
             required
@@ -36,7 +54,7 @@
       </form>
     </main>
     <h2>Emergency Physician List</h2>
-    <table>
+    <table id = "EmPhys-table">
       <thead>
         <tr>
           <th>Emergency Physician ID</th>
