@@ -1,0 +1,142 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>EDVisits</title>
+  </head>
+  <body>
+    <header>
+      <nav>
+        <a href="index.html">Home</a>
+        <a href="HospitalRegions.html">HospitalRegions</a>
+        <a href="EmergencyDepartments.html">EmergencyDepartments</a>
+        <a href="EmergencyPhysicians.html">EmergencyPhysicians</a>
+        <a href="Patients.html">Patients</a>
+        <a href="Treatments.html">Treatments</a>
+        <a href="EDVisits.html">EDVisits</a>
+      </nav>
+    </header>
+    <main>
+      <h2>Insert New EDVisit</h2>
+      <form action="/insertVisit" method="post">
+        <label>
+          Emergency Department:
+          <select name="emergency_department_id">
+            <option value="1">Emergency Department 1</option>
+            <option value="2">Emergency Department 2</option>
+            <option value="3">Emergency Department 3</option>
+            <option value="4">Emergency Department 4</option>
+            <option value="5">Emergency Department 5</option>
+            <option value="6">Emergency Department 6</option>
+          </select>
+          <br />
+        </label>
+        <br />
+        <label>
+          Patient ID:
+          <input type="number" name="patient_id" required />
+          <br />
+        </label>
+        <br />
+        <label>
+          Date of Visit:
+          <input type="date" name="date_of_visit" required />
+          <br />
+        </label>
+        <br />
+        <label>
+          Admit Time:
+          <input type="time" name="admit_time" required />
+          <br />
+        </label>
+        <br />
+        <input type="submit" value="Submit" />
+      </form>
+      <h2>Most Recent EDVisits</h2>
+      <table>
+        <thead>
+          <tr>
+            <th></th>
+            <th>ED Visit ID</th>
+            <th>Emergency Department</th>
+            <th>Patient</th>
+            <th>Date</th>
+            <th>Admit Time</th>
+            <th>Treatment</th>
+            <th>Emergency Physicians</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><a href="EditEDVisits.html?id=1">Edit</a></td>
+            <td>1</td>
+            <td>Emergency Department 1</td>
+            <td>Juan Doe</td>
+            <td>05-20-2023</td>
+            <td>05:00 AM</td>
+            <td>Morphine</td>
+            <td>
+              <form action="/visit-physicians" method="DELETE">
+                Dr. John Smith <button>Remove</button>
+              </form>
+              <form action="/visit-physicians" method="POST">
+                <select name="ed_visit_physician_id">
+                  <option value="1">Dr. Katy Price</option>
+                  <option value="2">Dr. Mary Jones</option>
+                  <option value="2">Dr. Jason Brown</option>
+                </select>
+                <button>Add</button>
+              </form>
+            </td>
+          </tr>
+          <tr>
+            <td><a href="EditEDVisits.html?id=2">Edit</a></td>
+            <td>2</td>
+            <td>Emergency Department 2</td>
+            <td>Sarah Doe</td>
+            <td>05-20-2023</td>
+            <td>09:00 AM</td>
+            <td>Tramadol</td>
+            <td>
+              <form action="/visit-physicians" method="DELETE">
+                Dr. Mary Jones <button>Remove</button>
+              </form>
+              <form action="/visit-physicians" method="DELETE">
+                Dr. Jason Brown <button>Remove</button>
+              </form>
+              <form action="/visit-physicians" method="POST">
+                <select name="ed_visit_physician_id">
+                  <option value="1">Dr. Katy Price</option>
+                  <option value="2">Dr. John Smith</option>
+                </select>
+                <button>Add</button>
+              </form>
+            </td>
+          </tr>
+          <tr>
+            <td><a href="EditEDVisits.html?id=3">Edit</a></td>
+            <td>3</td>
+            <td>Emergency Department 1</td>
+            <td>Mariah Doe</td>
+            <td>05-21-2023</td>
+            <td>08:00 AM</td>
+            <td>Amoxicillin</td>
+            <td>
+              <form action="/visit-physicians" method="DELETE">
+                Dr. Katy Price <button>Remove</button>
+              </form>
+              <form action="/visit-physicians" method="POST">
+                <select name="ed_visit_physician_id">
+                  <option value="1">Dr. John Smith</option>
+                  <option value="2">Dr. Mary Jones</option>
+                  <option value="2">Dr. Jason Brown</option>
+                </select>
+                <button>Add</button>
+              </form>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </main>
+  </body>
+</html>

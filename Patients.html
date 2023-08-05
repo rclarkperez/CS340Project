@@ -1,0 +1,99 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Patients</title>
+  </head>
+  <body>
+    <header>
+      <nav>
+        <a href="index.html">Home</a>
+        <a href="HospitalRegions.html">HospitalRegions</a>
+        <a href="EmergencyDepartments.html">EmergencyDepartments</a>
+        <a href="EmergencyPhysicians.html">EmergencyPhysicians</a>
+        <a href="Patients.html">Patients</a>
+        <a href="Treatments.html">Treatments</a>
+        <a href="EDVisits.html">EDVisits</a>
+      </nav>
+    </header>
+    <main>
+      <h2>Insert New Patient</h2>
+      <form action="/insertPatient" method="post">
+        <label>
+          Name:
+          <input type="text" name="name" required /><br /> </label
+        ><br />
+        <label>
+          Age:
+          <input type="number" name="age" required /><br /> </label
+        ><br />
+        <label>
+          Race:
+          <input type="text" name="race" required /><br /> </label
+        ><br />
+        <label>
+          Sex:
+          <input type="text" name="sex" required /><br /> </label
+        ><br />
+        <label>
+          Address:
+          <input type="text" name="address" required /><br /> </label
+        ><br />
+        <label>
+          Phone:
+          <input
+            type="tel"
+            name="phone"
+            pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
+            required
+          /><br />
+          <small>Format: 123-456-7890</small><br /> </label
+        ><br />
+        <input type="submit" value="Submit" />
+      </form>
+    </main>
+    <h2>Patient List</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Patient ID</th>
+          <th>Name</th>
+          <th>Age</th>
+          <th>Race</th>
+          <th>Sex</th>
+          <th>Address</th>
+          <th>Phone</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1</td>
+          <td>Juan Doe</td>
+          <td>23</td>
+          <td>Hispanic</td>
+          <td>Male</td>
+          <td>444 Fluffy Dog Lane</td>
+          <td>111-765-3218</td>
+        </tr>
+        <tr>
+          <td>1</td>
+          <td>Sarah Doe</td>
+          <td>43</td>
+          <td>Caucasian</td>
+          <td>Female</td>
+          <td>142 Last Moon Court</td>
+          <td>098-412-3333</td>
+        </tr>
+        <tr>
+          <td>1</td>
+          <td>Mariah Doe</td>
+          <td>70</td>
+          <td>Hispanic</td>
+          <td>Female</td>
+          <td>41 Moon Lane</td>
+          <td>142-444-9797</td>
+        </tr>
+      </tbody>
+    </table>
+  </body>
+</html>

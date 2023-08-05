@@ -1,0 +1,76 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>HospitalRegions</title>
+  </head>
+  <body>
+    <header>
+      <nav>
+        <a href="index.html">Home</a>
+        <a href="HospitalRegions.html">HospitalRegions</a>
+        <a href="EmergencyDepartments.html">EmergencyDepartments</a>
+        <a href="EmergencyPhysicians.html">EmergencyPhysicians</a>
+        <a href="Patients.html">Patients</a>
+        <a href="Treatments.html">Treatments</a>
+        <a href="EDVisits.html">EDVisits</a>
+      </nav>
+    </header>
+    <main>
+      <h2>Insert New Hospital Region</h2>
+      <form action="/submit_region" method="post">
+        <label>
+          County Name:
+          <input type="text" name="county_name" /><br /> </label
+        ><br />
+        <label>
+          Geographical Region Served:
+          <input type="text" name="geographical_region_served" /><br /> </label
+        ><br />
+        <input type="submit" value="Submit" />
+      </form>
+    </main>
+    <h2>Hospital Regions List</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Hospital Region ID</th>
+          <th>County</th>
+          <th>Geographical Region Served</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1</td>
+          <td>Tiger County</td>
+          <td>South East</td>
+        </tr>
+        <tr>
+          <td>1</td>
+          <td>Hippo County</td>
+          <td>North West</td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td>Penguin County</td>
+          <td>North East</td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td>Lion County</td>
+          <td>South West</td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td>Dolphin County</td>
+          <td>North East</td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td>Panda County</td>
+          <td>South East</td>
+        </tr>
+      </tbody>
+    </table>
+  </body>
+</html>

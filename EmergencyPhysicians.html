@@ -1,0 +1,114 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>EmergencyPhysicians</title>
+  </head>
+  <body>
+    <header>
+      <nav>
+        <a href="index.html">Home</a>
+        <a href="HospitalRegions.html">HospitalRegions</a>
+        <a href="EmergencyDepartments.html">EmergencyDepartments</a>
+        <a href="EmergencyPhysicians.html">EmergencyPhysicians</a>
+        <a href="Patients.html">Patients</a>
+        <a href="Treatments.html">Treatments</a>
+        <a href="EDVisits.html">EDVisits</a>
+      </nav>
+    </header>
+    <main>
+      <h2>Insert New Emergency Physician</h2>
+      <form action="/insertPhysician" method="post">
+        <label>
+          Name:
+          <input type="text" name="name" required /><br /> </label
+        ><br />
+        <label>
+          Credential:
+          <input
+            type="text"
+            name="credential"
+            required
+            placeholder="MD/DO"
+          /><br /> </label
+        ><br />
+        <input type="submit" value="Submit" />
+      </form>
+    </main>
+    <h2>Emergency Physician List</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Emergency Physician ID</th>
+          <th>Name</th>
+          <th>Credential</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1</td>
+          <td>John Smith</td>
+          <td>DO</td>
+          <td>
+            <form action="/physicians/1" method="DELETE">
+              <button onclick="delete_people('pid')">Delete</button>
+            </form>
+          </td>
+          <td>
+            <form action="/physicians/1" method="UPDATE">
+              <button onclick="update_people('id')">Update</button>
+            </form>
+          </td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td>Katy Price</td>
+          <td>MD</td>
+          <td>
+            <form action="/physicians/2" method="DELETE">
+              <button onclick="delete_people('pid')">Delete</button>
+            </form>
+          </td>
+          <td>
+            <form action="/physicians/2" method="UPDATE">
+              <button onclick="update_people('id')">Update</button>
+            </form>
+          </td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td>Mary Jones</td>
+          <td>DO</td>
+          <td>
+            <form action="/physicians/3" method="DELETE">
+              <button onclick="delete_people('pid')">Delete</button>
+            </form>
+          </td>
+          <td>
+            <form action="/physicians/3" method="UPDATE">
+              <button onclick="update_people('id')">Update</button>
+            </form>
+          </td>
+            <br />
+          </td>
+        </tr>
+        <tr>
+          <td>4</td>
+          <td>Jason Brown</td>
+          <td>MD</td>
+          <td>
+            <form action="/physicians/4" method="DELETE">
+              <button onclick="delete_people('pid')">Delete</button>
+            </form>
+          </td>
+          <td>
+            <form action="/physicians/4" method="UPDATE">
+              <button onclick="update_people('id')">Update</button>
+            </form>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </body>
+</html>

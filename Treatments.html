@@ -1,0 +1,69 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Treatments</title>
+  </head>
+  <body>
+    <header>
+      <nav>
+        <a href="index.html">Home</a>
+        <a href="HospitalRegions.html">HospitalRegions</a>
+        <a href="EmergencyDepartments.html">EmergencyDepartments</a>
+        <a href="EmergencyPhysicians.html">EmergencyPhysicians</a>
+        <a href="Patients.html">Patients</a>
+        <a href="Treatments.html">Treatments</a>
+        <a href="EDVisits.html">EDVisits</a>
+      </nav>
+    </header>
+    <main>
+      <h2>Insert New Treatment</h2>
+      <form action="/submit_region" method="post">
+        <label>
+          Treatment Name:
+          <input type="text" name="treatment_name" /><br /> </label
+        ><br />
+        <input type="submit" value="Submit" />
+      </form>
+    </main>
+    <h2>Treatments List</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Treatment ID</th>
+          <th>Treatment Name</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1</td>
+          <td>Morphine</td>
+          <td>
+            <form action="/treatments/1" method="DELETE">
+              <button>Delete</button>
+            </form>
+          </td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td>Tramadol</td>
+          <td>
+            <form action="/treatments/2" method="DELETE">
+              <button>Delete</button>
+            </form>
+          </td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td>Amoxicillin</td>
+          <td>
+            <form action="/treatments/3" method="DELETE">
+              <button>Delete</button>
+            </form>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </body>
+</html>

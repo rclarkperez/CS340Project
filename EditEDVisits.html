@@ -1,0 +1,78 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Edit ED Visits Form</title>
+  </head>
+  <body>
+    <header>
+      <nav>
+        <a href="index.html">Home</a>
+        <a href="HospitalRegions.html">HospitalRegions</a>
+        <a href="EmergencyDepartments.html">EmergencyDepartments</a>
+        <a href="EmergencyPhysicians.html">EmergencyPhysicians</a>
+        <a href="Patients.html">Patients</a>
+        <a href="Treatments.html">Treatments</a>
+        <a href="EDVisits.html">EDVisits</a>
+      </nav>
+    </header>
+    <main>
+      <h2>Edit ED Visits Form</h2>
+      <form action="/visits" method="put">
+        <label>
+          ED Visit ID:
+          <input type="text" name="ed_visit_id" />
+        </label>
+        <br />
+        <br />
+        <label>
+          Emergency Department:
+          <select name="emergency_department_id">
+            <option value="1">Department 1</option>
+            <option value="2">Department 2</option>
+            <option value="3">Department 3</option>
+          </select>
+        </label>
+        <br />
+        <br />
+        <label>
+          Patient:
+          <input type="text" name="patient_id" />
+        </label>
+        <br />
+        <br />
+        <label>
+          Date:
+          <input type="text" name="date" />
+        </label>
+        <br />
+        <br />
+        <label>
+          Admit Time:
+          <input type="text" name="admit_time" />
+        </label>
+        <br />
+        <br />
+        <label>
+          Treatment:
+          <select name="treatment_id">
+            <option value="1">Morphine</option>
+            <option value="2">Tramadol</option>
+            <option value="3">Amoxicillin</option>
+            <option value="null">No Treatment Rendered</option>
+          </select>
+        </label>
+        <br />
+        <br />
+
+        <select name="ed_visit_physician_ids" multiple>
+          <option value="1">Dr. Katy Price</option>
+          <option value="2">Dr. Mary Jones</option>
+          <option value="3">Dr. Jason Brown</option>
+        </select>
+
+        <input type="submit" value="Submit" />
+      </form>
+    </main>
+  </body>
+</html>
