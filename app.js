@@ -33,17 +33,17 @@ app.get('/', function(req, res)
     // If there is no query string, we just perform a basic SELECT
     if (req.query.name === undefined)
     {
-        query1 = "SELECT * FROM bsg_emPhys;";
+        query1 = "SELECT * FROM EmergencyPhysicians ";
     }
 
     // If there is a query string, we assume this is a search, and return desired results
     else
     {
-        query1 = `SELECT * FROM bsg_emPhys WHERE name LIKE "${req.query.name}%"`
+        query1 = `SELECT * FROM EmergencyPhysicians WHERE name LIKE "${req.query.name}%"`
     }
 
     // Query 2 is the same in both cases
-    let query2 = "SELECT * FROM bsg_emPhyss;";
+    let query2 = "SELECT * FROM EmergencyPhysicians ;";
 
     // Run the 1st query
     db.pool.query(query1, function(error, rows, fields){
@@ -99,7 +99,7 @@ app.post('/add-emPhys-form', function(req, res){
     }
 
     // Create the query and run it on the database
-    query1 = `INSERT INTO bsg_emPhys (name, certification) VALUES ('${data['input-name']}', ${certification})`;
+    query1 = `INSERT INTO EmergencyPhysicians (name, certification) VALUES ('${data['input-name']}', ${certification})`;
     db.pool.query(query1, function(error, rows, fields){
 
         // Check to see if there was an error
@@ -110,7 +110,7 @@ app.post('/add-emPhys-form', function(req, res){
             res.sendStatus(400);
         }
 
-        // If there was no error, we redirect back to our root route, which automatically runs the SELECT * FROM bsg_emPhys and
+        // If there was no error, we redirect back to our root route, which automatically runs the SELECT * FROM EmergencyPhysicians and
         // presents it on the screen
         else
         {
@@ -138,7 +138,7 @@ app.post('/add-emPhys-ajax', function(req, res)
     }
 
     // Create the query and run it on the database
-    query1 = `INSERT INTO bsg_emPhys (name, certification) VALUES ('${data.name}', ${certification})`;
+    query1 = `INSERT INTO EmergencyPhysicians (name, certification) VALUES ('${data.name}', ${certification})`;
     db.pool.query(query1, function(error, rows, fields){
 
         // Check to see if there was an error
@@ -150,10 +150,9 @@ app.post('/add-emPhys-ajax', function(req, res)
         }
         else
         {
-//             // If there was no error, perform a SELECT * on bsg_emPhys
-//             query2 = `SELECT bsg_emPhys.id, bsg_emPhys.name, bsg_emPhys.certification, bsg_emPhys.age, bsg_planets.name 
-// FROM bsg_emPhys 
-// LEFT JOIN bsg_planets ON bsg_emPhys.certification = bsg_planets.id;`;
+//             // If there was no error, perform a SELECT * on EmergencyPhysicians //             query2 = `SELECT EmergencyPhysicians.id, EmergencyPhysicians.name, EmergencyPhysicians.certification, bsg_planets.name 
+// FROM EmergencyPhysicians 
+// LEFT JOIN bsg_planets ON EmergencyPhysicians certification = bsg_planets.id;`;
 //             db.pool.query(query2, function(error, rows, fields){
 
 //                 // If there was an error on the second query, send a 400
@@ -176,8 +175,8 @@ app.post('/add-emPhys-ajax', function(req, res)
 app.delete('/delete-emPhys-ajax/', function(req,res,next){
   let data = req.body;
   let emPhysID = parseInt(data.id);
-  let deleteBsg_Cert_EmPhys = `DELETE FROM bsg_cert_emPhys WHERE pid = ?`;
-  let deleteBsg_EmPhys= `DELETE FROM bsg_emPhys WHERE id = ?`;
+//   let deleteBsg_Cert_EmPhys = `DELETE FROM bsg_cert_emPhys WHERE pid = ?`;
+  let deleteEmergencyPhysicians= `DELETE FROM EmergencyPhysicians WHERE id = ?`;
 
 
         // Run the 1st query
@@ -192,7 +191,7 @@ app.delete('/delete-emPhys-ajax/', function(req,res,next){
             else
             {
                 // Run the second query
-                db.pool.query(deleteBsg_EmPhys, [emPhysID], function(error, rows, fields) {
+                db.pool.query(deleteEmergencyPhysicians  [emPhysID], function(error, rows, fields) {
 
                     if (error) {
                         console.log(error);
@@ -210,7 +209,7 @@ app.put('/put-emPhys-ajax', function(req,res,next){
   let certification = parseInt(data.certification);
   let emPhys = parseInt(data.name);
 
-  queryUpdateCertification = `UPDATE bsg_emPhys SET certification = ? WHERE bsg_emPhys.id = ?`;
+  queryUpdateCertification = `UPDATE EmergencyPhysicians SET certification = ? WHERE EmergencyPhysicians.id = ?`;
 //   selectCertification = `SELECT * FROM bsg_planets WHERE id = ?`
 
         // Run the 1st query

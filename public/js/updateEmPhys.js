@@ -16,7 +16,7 @@ updateEmPhysForm.addEventListener("submit", function (e) {
     let nameValue = inputName.value;
     let credentialValue = inputCredential.value;
     
-    // currently the database table for bsg_emPhys does not allow updating values to NULL
+    // currently the database table for Emergency Physician does not allow updating values to NULL
     // so we must abort if being bassed NULL for credential
 
     if (isNaN(credentialValue)) 
