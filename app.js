@@ -23,7 +23,13 @@ app.use(express.static(__dirname + '/public'));         // this is needed to all
     
 
 // app.js
-
+app.get('/', function(req, res)
+    {
+        let query1 = "SELECT * FROM EmergencyPhysicians;";
+        db.pool.query(query1, function(error, rows, fields){
+            res.render('index', {data: rows});
+        })
+    });
 
 app.get('/', function(req, res)
 {
