@@ -58,7 +58,7 @@ updateEmPhysForm.addEventListener("submit", function (e) {
 function updateRow(data, emPhysID){
     let parsedData = JSON.parse(data);
     
-    let table = document.getElementById("emPhys-table");
+    let table = document.getElementById("EmPhys-table");
 
     for (let i = 0, row; row = table.rows[i]; i++) {
        //iterate through rows

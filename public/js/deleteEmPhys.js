@@ -16,8 +16,8 @@
 //   });
 // }
 
-// code for deletePerson using regular javascript/xhttp
-function deletePerson(EmPhysID) {
+// code for deleteEmPhys using regular javascript/xhttp
+function deleteEmPhys(EmPhysID) {
     // Put our data we want to send in a javascript object
     let data = {
         id: EmPhysID
