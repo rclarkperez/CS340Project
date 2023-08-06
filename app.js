@@ -43,7 +43,7 @@ app.get('/', function(req, res)
     }
 
     // Query 2 is the same in both cases
-    let query2 = "SELECT * FROM EmergencyPhysicians ;";
+    let query2 = "SELECT * FROM EmergencyPhysicians;";
 
     // Run the 1st query
     db.pool.query(query1, function(error, rows, fields){
