@@ -8,6 +8,7 @@ router.get("/api/visits", async (req, res) => {
   FROM EDVisits 
     INNER JOIN Patients ON EDVisits.patient_id = Patients.patient_id
     INNER JOIN EmergencyDepartments ON EDVisits.emergency_department_id = EmergencyDepartments.emergency_department_id
+    LEFT OUTER JOIN Treatments ON EDVisits.treatment_id = Treatments.treatment_id
   `;
   const [visits] = await db.pool.query(query);
 

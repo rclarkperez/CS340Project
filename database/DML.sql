@@ -24,6 +24,14 @@ VALUES (@name, @credential);
 SELECT *
 FROM EmergencyPhysicians;
 
+-- 3. Select Physicians of a visit
+SELECT *
+      FROM EmergencyPhysicians
+        INNER JOIN EDVisitPhysicians ON
+        EmergencyPhysicians.emergency_physician_id = EDVisitPhysicians.emergency_physician_id
+      WHERE 
+        EDVisitPhysicians.ed_visit_id = @ed_visit_id
+
 -- EmergencyDepartments
 -- 1. Insert Statement
 INSERT INTO EmergencyDepartments (hospital_name, address, phone, capacity)
@@ -66,11 +74,10 @@ VALUES (
 
 -- 2. Select Statement
 SELECT *
-FROM EDVisits 
-  INNER JOIN Patients ON EDVisits.patient_id = Patients.patient_id
-  INNER JOIN EmergencyDepartments ON EDVisits.emergency_department_id = EmergencyDepartments.emergency_department_id
-  LEFT JOIN EDVisitPhysicians ON EDVisitPhysicians.ed_visit_id = EDVisits.ed_visit_id
-  INNER JOIN EmergencyPhysicians ON EmergencyPhysicians.emergency_physician_id = EDVisitPhysicians.emergency_physician_id
+  FROM EDVisits 
+    INNER JOIN Patients ON EDVisits.patient_id = Patients.patient_id
+    INNER JOIN EmergencyDepartments ON EDVisits.emergency_department_id = EmergencyDepartments.emergency_department_id
+    LEFT OUTER JOIN Treatments ON EDVisits.treatment_id = Treatments.treatment_id
 
 -- 3. Update Statement (To be synced up with EDVisits edit button)
 UPDATE EDVisits

@@ -3,6 +3,32 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>EDVisits</title>
+    <script defer type="module">
+      import { getVisits } from "./js/api.js";
+
+      const visits = await getVisits();
+
+      visits.forEach((visit) => {
+        document.querySelector("#visits-table tbody").innerHTML += `
+          <tr>
+            <td><a href="EditEDVisits.html?id=${
+              visit.ed_visit_id
+            }">Edit</a></td>
+            <td>${visit.ed_visit_id}</td>
+            <td>${visit.hospital_name}</td>
+            <td>${visit.name}</td>
+            <td>${visit.date_of_visit}</td>
+            <td>${visit.admit_time}</td>
+            <td>${visit.treatment_name}</td>
+            <td>
+              ${visit.physicians
+                .map((physician) => `<div>${physician.name}</div>`)
+                .join("")}
+            </td>
+          </tr>
+        `;
+      });
+    </script>
   </head>
   <body>
     <header>
@@ -53,7 +79,7 @@
         <input type="submit" value="Submit" />
       </form>
       <h2>Most Recent EDVisits</h2>
-      <table>
+      <table id="visits-table">
         <thead>
           <tr>
             <th></th>
@@ -67,42 +93,21 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td><a href="EditEDVisits.html?id=1">Edit</a></td>
-            <td>1</td>
-            <td>Emergency Department 1</td>
-            <td>Juan Doe</td>
-            <td>05-20-2023</td>
-            <td>05:00 AM</td>
-            <td>Morphine</td>
-            <td><div>Dr. John Smith</div></td>
-          </tr>
-          <tr>
-            <td><a href="EditEDVisits.html?id=2">Edit</a></td>
-            <td>2</td>
-            <td>Emergency Department 2</td>
-            <td>Sarah Doe</td>
-            <td>05-20-2023</td>
-            <td>09:00 AM</td>
-            <td>Tramadol</td>
-            <td>
-              <div>Dr. Mary Jones</div>
-              <div>Dr. Jason Brown</div>
-            </td>
-          </tr>
-          <tr>
-            <td><a href="EditEDVisits.html?id=3">Edit</a></td>
-            <td>3</td>
-            <td>Emergency Department 1</td>
-            <td>Mariah Doe</td>
-            <td>05-21-2023</td>
-            <td>08:00 AM</td>
-            <td>Amoxicillin</td>
-            <td>
-              <div>Dr. Katy Price</div>
-            </td>
-          </tr>
-        </tbody>
+          <!-- 
+            <tr>
+              <td><a href="EditEDVisits.html?id=2">Edit</a></td>
+              <td>2</td>
+              <td>Emergency Department 2</td>
+              <td>Sarah Doe</td>
+              <td>05-20-2023</td>
+              <td>09:00 AM</td>
+              <td>Tramadol</td>
+              <td>
+                <div>Dr. Mary Jones</div>
+                <div>Dr. Jason Brown</div>
+              </td>
+            </tr>
+        --></tbody>
       </table>
     </main>
   </body>
