@@ -5,6 +5,7 @@
   "main": "app.js",
   "scripts": {
     "start": "node app.js",
+    "dev": "nodemon app.js",
     "db": "mysql -hcontainers-us-west-35.railway.app -uroot -p --port 7487 --protocol=TCP railway < ./database/DDL.sql"
   },
   "author": "Anthony Corton",
@@ -14,5 +15,8 @@
     "express-handlebars": "^6.0.2",
     "forever": "^4.0.3",
     "mysql": "^2.18.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
   }
 }
