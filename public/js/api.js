@@ -41,3 +41,22 @@ export async function getPhysicians() {
 
   return await response.json();
 }
+
+export async function updateVisit(data) {
+  const response = await fetch(`/api/visits/${data.ed_visit_id}`, {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(data),
+  });
+
+  if (!response.ok) {
+    const { message } = await response.json();
+    alert(message);
+    return;
+  }
+
+  const { message } = await response.json();
+  alert(message);
+
+  return true;
+}

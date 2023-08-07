@@ -10,6 +10,7 @@
         getTreatments,
         getDepartments,
         getPhysicians,
+        updateVisit,
       } from "./js/api.js";
 
       const visits = await getVisits();
@@ -58,12 +59,38 @@
 
       // Populate the form with existing data
       for (const key in visit) {
-        const input = document.querySelector(`[name='${key}']`);
+        const input = document.querySelector(
+          `#edit-visit-form [name='${key}']`
+        );
 
         if (input) {
           input.value = visit[key];
         }
       }
+
+      document
+        .querySelector("#edit-visit-form")
+        .addEventListener("submit", async (e) => {
+          e.preventDefault();
+
+          const data = {
+            ed_visit_id: id,
+          };
+          document
+            .querySelectorAll(`#edit-visit-form [name]`)
+            .forEach((input) => {
+              data[input.name] = input.value;
+            });
+
+          const physicianList = document.querySelector(
+            "[name='ed_visit_physician_ids']"
+          );
+          data.ed_visit_physician_ids = [...physicianList.selectedOptions].map(
+            (x) => x.value
+          );
+
+          await updateVisit(data);
+        });
     </script>
   </head>
   <body>
@@ -80,13 +107,7 @@
     </header>
     <main>
       <h2>Edit ED Visits Form</h2>
-      <form action="/visits" method="put">
-        <label>
-          ED Visit ID:
-          <input type="text" name="ed_visit_id" />
-        </label>
-        <br />
-        <br />
+      <form id="edit-visit-form" action="/visits" method="put">
         <label>
           Emergency Department:
           <select name="emergency_department_id">

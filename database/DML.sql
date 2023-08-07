@@ -104,9 +104,7 @@ SELECT *
 FROM EDVisitPhysicians;
 
 -- 3. Delete Statement (Remove physician from visit if needed, to be synced up with x buttons if needed)
-DELETE FROM EDVisitPhysicians
-WHERE ed_visit_id = @ed_visit_id
-AND   ed_visit_physician_id = @ed_visit_physician_id;
+DELETE FROM EDVisitPhysicians WHERE ed_visit_id = @ed_visit_id;
 
 -- Treatments
 -- 1. Insert Statement
