@@ -1,8 +1,10 @@
-USE cs340_clarkr2;
+DROP DATABASE IF EXISTS patient_physician_db;
+CREATE DATABASE patient_physician_db;
+USE patient_physician_db;
 
 -- Create Patients table
 
-CREATE  TABLE `Patients`(
+CREATE TABLE `Patients`(
   `patient_id` int(250) UNIQUE NOT NULL AUTO_INCREMENT,
   `name` varchar(250) NOT NULL,
   `age` int(11) NOT NULL,

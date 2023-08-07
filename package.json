@@ -4,7 +4,8 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node app.js",
+    "db": "mysql -hcontainers-us-west-35.railway.app -uroot -p --port 7487 --protocol=TCP railway < ./database/DDL.sql"
   },
   "author": "Anthony Corton",
   "license": "ISC",
