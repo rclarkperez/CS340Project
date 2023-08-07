@@ -3,6 +3,68 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Edit ED Visits Form</title>
+
+    <script defer type="module">
+      import {
+        getVisits,
+        getTreatments,
+        getDepartments,
+        getPhysicians,
+      } from "./js/api.js";
+
+      const visits = await getVisits();
+      const treatments = await getTreatments();
+      const departments = await getDepartments();
+      const physicians = await getPhysicians();
+
+      const url = new URL(location.href);
+      const id = url.searchParams.get("id");
+
+      // Get the visit with an id that matches the query string
+      const visit = visits.find((x) => x.ed_visit_id == id);
+
+      departments.forEach((department) => {
+        document.querySelector(
+          `[name="emergency_department_id"]`
+        ).innerHTML += `
+          <option value="${department.emergency_department_id}">
+            ${department.hospital_name}
+          </option>
+        `;
+      });
+
+      treatments.forEach((treatment) => {
+        document.querySelector(`[name="treatment_id"]`).innerHTML += `
+          <option value="${treatment.treatment_id}">
+            ${treatment.treatment_name}
+          </option>
+        `;
+      });
+
+      physicians.forEach((physician) => {
+        const isSelected = visit.physicians.find(
+          (x) => x.emergency_physician_id == physician.emergency_physician_id
+        );
+
+        document.querySelector(`[name="ed_visit_physician_ids"]`).innerHTML += `
+          <option
+            value="${physician.emergency_physician_id}"
+            ${isSelected ? "selected" : ""}
+          >
+            ${physician.name}
+          </option>
+        `;
+      });
+
+      // Populate the form with existing data
+      for (const key in visit) {
+        const input = document.querySelector(`[name='${key}']`);
+
+        if (input) {
+          input.value = visit[key];
+        }
+      }
+    </script>
   </head>
   <body>
     <header>
@@ -28,22 +90,20 @@
         <label>
           Emergency Department:
           <select name="emergency_department_id">
-            <option value="1">Department 1</option>
-            <option value="2">Department 2</option>
-            <option value="3">Department 3</option>
+            <!-- <option value="1">Department 1</option> -->
           </select>
         </label>
         <br />
         <br />
         <label>
-          Patient:
+          Patient ID:
           <input type="text" name="patient_id" />
         </label>
         <br />
         <br />
         <label>
           Date:
-          <input type="text" name="date" />
+          <input type="text" name="date_of_visit" />
         </label>
         <br />
         <br />
@@ -56,19 +116,15 @@
         <label>
           Treatment:
           <select name="treatment_id">
-            <option value="1">Morphine</option>
-            <option value="2">Tramadol</option>
-            <option value="3">Amoxicillin</option>
             <option value="null">No Treatment Rendered</option>
+            <!-- <option value="3">Amoxicillin</option> -->
           </select>
         </label>
         <br />
         <br />
 
         <select name="ed_visit_physician_ids" multiple>
-          <option value="1">Dr. Katy Price</option>
-          <option value="2">Dr. Mary Jones</option>
-          <option value="3">Dr. Jason Brown</option>
+          <!-- <option value="1">Dr. Katy Price</option> -->
         </select>
 
         <input type="submit" value="Submit" />

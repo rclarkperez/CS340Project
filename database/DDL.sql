@@ -90,7 +90,7 @@ VALUES (1,'George Castanza', 32, 'Hispanic','Male','2225 NW Broadway, New York, 
 -- Sample data EmergencyPhysicians
 
 INSERT INTO `EmergencyPhysicians`
-VALUES (1,'Gregory House', 'DO'), (2, 'Dr Grey', 'DO'), (3,'Emmett Brown', 'Other');
+VALUES (1,'John Smith', 'DO'), (2, 'Katy Price', 'MD'), (3,'Mary Jones', 'DO'), (4,'Jason Brown', 'MD');
 
 -- Sample data HospitalRegions
 

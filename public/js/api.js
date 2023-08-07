@@ -6,6 +6,38 @@ export async function getVisits() {
     return;
   }
 
-  const data = await response.json();
-  return data;
+  return await response.json();
+}
+
+export async function getTreatments() {
+  const response = await fetch(`/api/treatments`);
+  if (!response.ok) {
+    const { message } = await response.json();
+    alert(message);
+    return;
+  }
+
+  return await response.json();
+}
+
+export async function getDepartments() {
+  const response = await fetch(`/api/departments`);
+  if (!response.ok) {
+    const { message } = await response.json();
+    alert(message);
+    return;
+  }
+
+  return await response.json();
+}
+
+export async function getPhysicians() {
+  const response = await fetch(`/api/physicians`);
+  if (!response.ok) {
+    const { message } = await response.json();
+    alert(message);
+    return;
+  }
+
+  return await response.json();
 }

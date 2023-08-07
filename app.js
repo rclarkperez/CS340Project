@@ -14,6 +14,9 @@ app.engine(".hbs", engine({ extname: ".hbs" })); // Create an instance of the ha
 app.set("view engine", ".hbs"); // Tell express to use the handlebars engine whenever it encounters a *.hbs file.
 
 const visitsRouter = require("./routes/visits");
+const treatmentsRouter = require("./routes/treatments");
+const departmentsRouter = require("./routes/departments");
+const physiciansRouter = require("./routes/physicians");
 
 // Database
 var db = require("./database/db-connector");
@@ -84,6 +87,9 @@ app.get("/", function (req, res) {
 });
 
 app.use("/", visitsRouter);
+app.use("/", treatmentsRouter);
+app.use("/", departmentsRouter);
+app.use("/", physiciansRouter);
 
 app.post("/add-emPhys-form", function (req, res) {
   // Capture the incoming data and parse it back to a JS object
